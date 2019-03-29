@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BookingSearch {
 	
@@ -20,6 +21,11 @@ public class BookingSearch {
 			}
 		}
 		return foundBookings;
+	}
+	
+	static ArrayList<Room> searchRoomDate(ArrayList<Date> dates)
+	{
+		return null;
 	}
 
 }
