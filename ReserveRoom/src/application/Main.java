@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
-	ArrayList<Room> rooms = new ArrayList<>();
+	static ArrayList<Room> rooms = new ArrayList<>();
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -35,5 +35,9 @@ public class Main extends Application {
 	public static Date getDate()
 	{
 		return Calendar.getInstance().getTime();
+	}
+	public static ArrayList<Room> getRooms()
+	{
+		return rooms;
 	}
 }
