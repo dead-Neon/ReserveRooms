@@ -1,5 +1,6 @@
 package application;
 	
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,6 +11,8 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
+	ArrayList<Room> rooms = new ArrayList<>();
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {

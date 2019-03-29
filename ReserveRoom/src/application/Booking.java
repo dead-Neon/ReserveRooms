@@ -1,17 +1,23 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Booking {
 	
 	String fname, lname;
-	Date date;
+	ArrayList<Date> dates = new ArrayList<>();
 	
-	Booking(Date date, String fname, String lname)
+	Booking(ArrayList<Date> dates, String fname, String lname)
 	{
-		this.date = date;
+		this.dates = dates;
 		this.fname = fname;
 		this.lname = lname;
+	}
+	
+	public ArrayList<Date> getDates()
+	{
+		return dates;
 	}
 
 }
