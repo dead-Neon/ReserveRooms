@@ -5,19 +5,40 @@ import java.util.Date;
 
 public class Room {
 	int size;
+	boolean cleaned;
 
 	ArrayList<Booking> bookings = new ArrayList<>();
 
 	Room(int size) {
 		this.size = size;
+		cleaned = true;
 	}
 
 	public void addBooking(ArrayList<Date> dates, String fname, String lname) {
-
+		boolean available = true;
+		
 		if (dates.get(0).compareTo(Main.getDate()) > 0) {
-			Booking booking = new Booking(dates, fname, lname);
-			bookings.add(booking);
-		} else {
+			for (int i = 0; i < bookings.size();i ++)
+			{
+				for (int j = 0; j < bookings.get(i).getDates().size(); j ++)
+				{
+					if (bookings.get(i).getDates().contains(dates.get(j)))
+					{
+						available = false;
+					}
+				}
+			}
+			if (available)
+			{
+				Booking booking = new Booking(dates, fname, lname);
+				bookings.add(booking);
+			}
+			else
+			{
+				System.out.println("Room taken for these dates");
+			}
+		} 
+		else {
 			System.out.println("Date has already passed.");
 		}
 	}
@@ -33,5 +54,25 @@ public class Room {
 	public ArrayList<Booking> getBookings() {
 		return bookings;
 	}
-
+	
+	public void setCleaned(boolean cleaned)
+	{
+		this.cleaned = cleaned;
+	}
+	
+	public void setSize(int size)
+	{
+		this.size = size;
+	}
+	
+	public void viewBookings()
+	{
+		for (int i = 0; i < bookings.size(); i ++)
+		{
+			for (int j = 0; j < bookings.get(i).getDates().size(); j ++)
+			{
+				System.out.println("DATE TAKEN: " + bookings.get(i).getDates().get(j));
+			}
+		}	
+	}
 }
