@@ -1,5 +1,8 @@
 package application;
 	
+import java.util.Calendar;
+import java.util.Date;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -24,5 +27,10 @@ public class Main extends Application {
 		launch(args);
 		
 		System.out.println("");
+	}
+	
+	public static Date getDate()
+	{
+		return Calendar.getInstance().getTime();
 	}
 }
