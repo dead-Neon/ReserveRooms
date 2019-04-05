@@ -7,16 +7,20 @@ public class Room {
 	int size;
 	boolean cleaned;
 
+	
+	Date date = new Date();
+	
+	
 	ArrayList<Booking> bookings = new ArrayList<>();
 
-	Room(int size) {
+	public Room(int singleBeds, int doubleBeds) {
 		this.size = size;
 		cleaned = true;
 	}
 
-	public void addBooking(ArrayList<Date> dates, String fname, String lname) {
+	public void addBooking(Date enter, Date leave, String fname, String lname) {
 		boolean available = true;
-		
+		ArrayList<Date> dates = new ArrayList<>();
 		if (dates.get(0).compareTo(Main.getDate()) > 0) {
 			for (int i = 0; i < bookings.size();i ++)
 			{
@@ -75,4 +79,5 @@ public class Room {
 			}
 		}	
 	}
+
 }
