@@ -2,25 +2,23 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class Room {
-	int size;
+	int singleBed, doubleBed;
 	boolean cleaned;
 
-	
-	Date date = new Date();
-	
-	
-	ArrayList<Booking> bookings = new ArrayList<>();
+	LinkedList<Booking> bookings = new LinkedList<>();
 
-	public Room(int singleBeds, int doubleBeds) {
-		this.size = size;
+	Room(int singleBed, int doubleBed) {
+		this.singleBed = singleBed;
+		this.doubleBed = doubleBed;
 		cleaned = true;
 	}
 
-	public void addBooking(Date enter, Date leave, String fname, String lname) {
+	public void addBooking(ArrayList<Date> dates, String fname, String lname) {
 		boolean available = true;
-		ArrayList<Date> dates = new ArrayList<>();
+		
 		if (dates.get(0).compareTo(Main.getDate()) > 0) {
 			for (int i = 0; i < bookings.size();i ++)
 			{
@@ -29,7 +27,12 @@ public class Room {
 					if (bookings.get(i).getDates().contains(dates.get(j)))
 					{
 						available = false;
+						break;
 					}
+				}
+				if (available)
+				{
+					break;
 				}
 			}
 			if (available)
@@ -55,7 +58,7 @@ public class Room {
 		}
 	}
 
-	public ArrayList<Booking> getBookings() {
+	public LinkedList<Booking> getBookings() {
 		return bookings;
 	}
 	
@@ -64,20 +67,14 @@ public class Room {
 		this.cleaned = cleaned;
 	}
 	
-	public void setSize(int size)
-	{
-		this.size = size;
-	}
-	
 	public void viewBookings()
 	{
 		for (int i = 0; i < bookings.size(); i ++)
 		{
 			for (int j = 0; j < bookings.get(i).getDates().size(); j ++)
 			{
-				System.out.println("DATE TAKEN: " + bookings.get(i).getDates().get(j));
+				System.out.println("Name: " +  bookings.get(i).getFname() + " " + bookings.get(i).getLname() + " DATE TAKEN: " + bookings.get(i).getDates().get(j));
 			}
 		}	
 	}
-
 }
