@@ -2,16 +2,17 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class BookingSearch {
 	
-	static ArrayList<Booking> searchName(String fname)
+	static LinkedList<Booking> searchName(String fname)
 	{
-		ArrayList<Booking>  foundBookings = new ArrayList<>();
+		LinkedList<Booking>  foundBookings = new LinkedList<>();
 		ArrayList<Room> rooms = Main.getRooms();
 		for (int i = 0; i < rooms.size(); i++)
 		{
-			ArrayList<Booking> bookings = rooms.get(i).getBookings();
+			LinkedList<Booking> bookings = rooms.get(i).getBookings();
 			for (int j = 0; j < bookings.size(); j++)
 			{
 				if (bookings.get(j).getFname() == fname)
