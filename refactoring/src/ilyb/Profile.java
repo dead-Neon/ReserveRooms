@@ -1,11 +1,15 @@
 package ilyb;
 
 import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
-public class Profile { 
+public class Profile {
    private Map<String,Answer> answers = new HashMap<>();
+
    private int score;
    private String name;
+   private Matches myMatches = new Matches(this);
 
    public Profile(String name) {
       this.name = name;
@@ -15,37 +19,38 @@ public class Profile {
       return name;
    }
 
-   public void add(Answer answer) { 
+   public void add(Answer answer) {
       answers.put(answer.getQuestionText(), answer);
    }
-   
-   public boolean matches(Criteria criteria) { 
-      score = 0;
-      
-      boolean kill = false;
-      boolean anyMatches = false; 
-      for (Criterion criterion: criteria) {   
-         Answer answer = answers.get(
-               criterion.getAnswer().getQuestionText()); 
-         boolean match = 
-               criterion.getWeight() == Weight.DontCare || 
-               answer.match(criterion.getAnswer());
 
-         if (!match && criterion.getWeight() == Weight.MustMatch) {  
-            kill = true;
-         }
-         if (match) {         
-            score += criterion.getWeight().getValue();
-         }
-         anyMatches |= match;  
-      }
-      if (kill)       
-         return false;
-      return anyMatches; 
+
+   public boolean calculateMatches(Criteria criteria) {
+	   return myMatches.matches(criteria);
    }
+   
+   
+
+  public Map<String, Answer> getAnswer() {
+	  return answers;
+  }
 
    public int score() {
       return score;
    }
+   
+   public void setScore(int set) {
+	   score = set;
+   }
+   
+   public void addScore(int add) {
+	   score = score+add;
+   }
+
+   
+   @Override
+   public String toString() {
+     return name;
+   }
+
 }
 

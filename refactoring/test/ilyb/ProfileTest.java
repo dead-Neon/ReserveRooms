@@ -70,7 +70,7 @@ public class ProfileTest {
       criteria.add(
             new Criterion(answerReimbursesTuition, Weight.MustMatch));
 
-      boolean matches = profile.matches(criteria);
+      boolean matches = profile.calculateMatches(criteria);
 
       assertFalse(matches);
    }
@@ -81,7 +81,7 @@ public class ProfileTest {
       criteria.add(
             new Criterion(answerReimbursesTuition, Weight.DontCare));
 
-      boolean matches = profile.matches(criteria);
+      boolean matches = profile.calculateMatches(criteria);
 
       assertTrue(matches);
    }
@@ -93,7 +93,7 @@ public class ProfileTest {
       criteria.add(new Criterion(answerThereIsRelocation, Weight.Important));
       criteria.add(new Criterion(answerReimbursesTuition, Weight.Important));
 
-      boolean matches = profile.matches(criteria);
+      boolean matches = profile.calculateMatches(criteria);
 
       assertTrue(matches);
    }
@@ -105,7 +105,7 @@ public class ProfileTest {
       criteria.add(new Criterion(answerThereIsRelocation, Weight.Important));
       criteria.add(new Criterion(answerReimbursesTuition, Weight.Important));
 
-      boolean matches = profile.matches(criteria);
+      boolean matches = profile.calculateMatches(criteria);
 
       assertFalse(matches);
    }
@@ -115,7 +115,7 @@ public class ProfileTest {
       profile.add(answerThereIsNoRelocation);
       criteria.add(new Criterion(answerThereIsRelocation, Weight.Important));
 
-      profile.matches(criteria);
+      profile.calculateMatches(criteria);
 
       assertThat(profile.score(), equalTo(0));
    }
@@ -125,7 +125,7 @@ public class ProfileTest {
       profile.add(answerThereIsRelocation);
       criteria.add(new Criterion(answerThereIsRelocation, Weight.Important));
 
-      profile.matches(criteria);
+      profile.calculateMatches(criteria);
 
       assertThat(profile.score(), equalTo(Weight.Important.getValue()));
    }
@@ -139,7 +139,7 @@ public class ProfileTest {
       criteria.add(new Criterion(answerReimbursesTuition, Weight.WouldPrefer));
       criteria.add(new Criterion(answerHasOnsiteDaycare, Weight.VeryImportant));
 
-      profile.matches(criteria);
+      profile.calculateMatches(criteria);
 
       int expectedScore = Weight.Important.getValue() + Weight.WouldPrefer.getValue();
       assertThat(profile.score(), equalTo(expectedScore));
