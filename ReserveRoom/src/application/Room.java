@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class Room {
-	int singleBed, doubleBed;
+	int singleBeds, doubleBeds;
 	boolean cleaned;
 
 	LinkedList<Booking> bookings = new LinkedList<>();
