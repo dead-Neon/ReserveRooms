@@ -10,5 +10,4 @@ public class Account {
 		this.email = email;
 		this.phone = phone;
 	}
-
 }
