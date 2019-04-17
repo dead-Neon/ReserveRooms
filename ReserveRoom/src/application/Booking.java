@@ -1,68 +1,50 @@
 package application;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Booking {
-	final SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
-	DateFormat dateFormat = DateFormat.getDateTimeInstance( DateFormat.DEFAULT,DateFormat.DEFAULT, locale);
-	String fname, lname;
+	String bookedName;
+	Date arrive;
+	int days;
 	ArrayList<Date> dates = new ArrayList<>();
-	boolean checkIn, checkOut;
+	Calendar cal = Calendar.getInstance();
+	boolean checkedIn, checkedOut;
 	
-	
-	
-	public static String getNextDate(String  curDate) {
-		  final SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-		  Date date = null;
-		try {
-			date = format.parse(curDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		  final Calendar calendar = Calendar.getInstance();
-		  calendar.setTime(date);
-		  calendar.add(Calendar.DAY_OF_YEAR, 1);
-		  return format.format(calendar.getTime()); 
-		}
-	
-	public boolean isCheckIn() {
+	public boolean isCheckedIn() {
 		
-		return checkIn;
+		return checkedIn;
 	}
 
-	public void setCheckIn(boolean checkIn) {
-		this.checkIn = checkIn;
+	public void setCheckedIn(boolean checkedIn) {
+		this.checkedIn = checkedIn;
 	}
 
-	public boolean isCheckOut() {
-		return checkOut;
+	public boolean isCheckedOut() {
+		return checkedOut;
 	}
 
-	public void setCheckOut(boolean checkOut) {
-		this.checkOut = checkOut;
+	public void setCheckedOut(boolean checkedOut) {
+		this.checkedOut = checkedOut;
 	}
 
 	public void setDates(ArrayList<Date> dates) {
 		this.dates = dates;
 	}
 
-	Booking(Date startDate, Date leaveDate, String fname, String lname)
+	Booking(Date arrive, int days, String bookedName)
 	{
-		ArrayList<Date> dates = new ArrayList<>();
-		dates.add(startDate);
-		dates.add(leaveDate);
-		while (startDate != leaveDate)
+		this.days = days;
+		this.arrive = arrive;
+		this.bookedName = bookedName;
+		dates = new ArrayList<>();
+		cal.setTime(arrive);
+		for (int i = 0; i < days; i ++)
 		{
-			startDate = getNextDate(startDate);
+			dates.add(cal.getTime());
+			cal.add(Calendar.DATE, 1 );
 		}
-		
-		this.fname = fname;
-		this.lname = lname;
 	}
 	
 	public ArrayList<Date> getDates()
@@ -70,21 +52,8 @@ public class Booking {
 		return dates;
 	}
 
-	public String getFname() {
-		return fname;
+	public String getBookedName() {
+		return bookedName;
 	}
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	public String getLname() {
-		return lname;
-	}
-
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
-	
-
 }
+
