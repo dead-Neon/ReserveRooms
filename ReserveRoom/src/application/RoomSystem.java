@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class MainSysyem {
+public class RoomSystem {
 	
-	static LinkedList<Booking> searchName(String fname)
+	static LinkedList<Booking> searchRooms(String name)
 	{
 		LinkedList<Booking>  foundBookings = new LinkedList<>();
 		ArrayList<Room> rooms = Main.getRooms();
@@ -15,7 +15,7 @@ public class MainSysyem {
 			LinkedList<Booking> bookings = rooms.get(i).getBookings();
 			for (int j = 0; j < bookings.size(); j++)
 			{
-				if (bookings.get(j).getFname() == fname)
+				if (bookings.get(j).getBookedName() == name)
 				{
 					foundBookings.add(bookings.get(j));
 				}
