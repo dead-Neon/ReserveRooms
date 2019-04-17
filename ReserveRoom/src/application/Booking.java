@@ -1,15 +1,13 @@
 package application;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Booking {
 	String bookedName;
-	Date arrive, leave;
+	Date arrive;
+	int days;
 	ArrayList<Date> dates = new ArrayList<>();
 	Calendar cal = Calendar.getInstance();
 	boolean checkedIn, checkedOut;
@@ -35,16 +33,17 @@ public class Booking {
 		this.dates = dates;
 	}
 
-	Booking(Date startDate, Date leaveDate, String fname, String lname)
+	Booking(Date arrive, int days, String bookedName)
 	{
-		ArrayList<Date> dates = new ArrayList<>();
-		cal.setTime(startDate);
-		Date newDate = startDate;
-		while (newDate != leaveDate)
+		this.days = days;
+		this.arrive = arrive;
+		this.bookedName = bookedName;
+		dates = new ArrayList<>();
+		cal.setTime(arrive);
+		for (int i = 0; i < days; i ++)
 		{
-			dates.add(newDate);
+			dates.add(cal.getTime());
 			cal.add(Calendar.DATE, 1 );
-			newDate = cal.getTime();
 		}
 	}
 	

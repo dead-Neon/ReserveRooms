@@ -3,7 +3,7 @@ package application;
 public class Bill {
 	double outstandingBalance, paidBalance;
 	
-	Bill(int roomCost, int days){
+	Bill(double roomCost, int days){
 		outstandingBalance = roomCost*days;
 	}
 	
@@ -23,12 +23,21 @@ public class Bill {
 		return true;
 	}
 	
-	public double getBill()
+	public double getOutstanding()
 	{
 		return outstandingBalance;
 	}
 	
+	public double getPaidBalance()
+	{
+		return paidBalance;
+	}
+	
 	public void makePayment(double payment) {
+		if (payment > outstandingBalance)
+		{
+			payment = outstandingBalance;
+		}
 		//Access pay servers
 		outstandingBalance = outstandingBalance - payment;
 	}
